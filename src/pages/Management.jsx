@@ -14,7 +14,7 @@ import * as S from '../components/_styled';
 import Candidate from '../components/Candidate';
 import Bar from '../components/Bar';
 
-import { addDoc, arrayUnion, collection, deleteDoc, doc, getFirestore, onSnapshot, query, setDoc, updateDoc, where } from 'firebase/firestore';
+import { addDoc, arrayUnion, collection, deleteDoc, doc, getDocs, getFirestore, onSnapshot, query, setDoc, updateDoc, where } from 'firebase/firestore';
 import { useRef, useEffect } from 'react';
 
 
@@ -33,16 +33,26 @@ function Management({ state, setState }) {
 
     async function enableVotes() {
         const q = query(collection(db, "rooms"), where("id", "==", state.id));
-        await updateDoc(q, {
-            enabled: true
-        })
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach(async (document) => 
+        {
+            const ref = doc(db, "rooms", document.id)
+            await updateDoc(ref, {
+                enabled: true,
+            })
+        });
     }
     
     async function stopVotes() {
         const q = query(collection(db, "rooms"), where("id", "==", state.id));
-        await updateDoc(q, {
-            enabled: false
-        })
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach(async (document) => 
+        {
+            const ref = doc(db, "rooms", document.id)
+            await updateDoc(ref, {
+                enabled: false,
+            })
+        });
     }
 
     async function removeCandidate(id) {

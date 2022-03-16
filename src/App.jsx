@@ -30,7 +30,8 @@ function App() {
   const [state, setState] = useState({
     id: '',
     candidates: [],
-    votes: []
+    votes: [],
+    selected: ''
   })
 
   useEffect(() => {

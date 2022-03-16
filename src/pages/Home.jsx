@@ -6,7 +6,7 @@ import { FaLock } from 'react-icons/fa';
 import * as S from '../components/_styled';
 import { getFirestore, collection, addDoc, onSnapshot, setDoc, doc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
-
+import {useEffect, useRef} from 'react'
 function makeid(length) {
     var result = '';
     var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -21,12 +21,12 @@ function makeid(length) {
 
 const Home = ({state, setState}) => {
 
-
+    const roomRef = useRef(null)
     const db = getFirestore();
     const navigate = useNavigate()
 
     async function createRoom() {
-        const id = makeid(4);
+        const id = makeid(4).toUpperCase();
         const docRef = await addDoc(collection(db, "rooms"), {
             id,
             enabled: false,
@@ -36,16 +36,20 @@ const Home = ({state, setState}) => {
         navigate('/create', {replace: true})
     }
 
+    async function joinRoom() {
+        setState(prevState => ({...prevState, id: roomRef.current?.value}))
+        navigate('/vote', {replace: true})
+    }
 
     return <>
         <Title><em>HOME</em> SCREEN</Title>
         <Button onClick={createRoom} variant="green">CREATE ROOM</Button>
         <Field>
-            <Input placeholder="#R2K9" />
+            <Input ref={roomRef} placeholder="#R2K9" />
             <FaLock fontSize="16  " color={S.theme.darkgray} />
         </Field>
 
-        <Button variant="teal">JOIN A ROOM</Button>
+        <Button onClick={joinRoom} variant="teal">JOIN A ROOM</Button>
     </>
 }
 
