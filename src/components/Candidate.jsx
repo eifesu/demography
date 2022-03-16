@@ -2,7 +2,8 @@ import styled from 'styled-components'
 import * as S from './_styled'
 import Field from './Field'
 
-const Candidate = styled(Field)`
+const Candidate = styled(Field)
+`
    
     position: relative;
     width: 250px;
@@ -18,6 +19,8 @@ const Candidate = styled(Field)`
     font-size: 20px;
     z-index: 1;
     }
+
+    transition: 0.15s ease-in;
 
     ${(props) => {
         switch(props.variant) {

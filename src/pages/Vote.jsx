@@ -37,15 +37,15 @@ const Vote = ({state, setState}) => {
 
         {state.candidates && state.candidates.map((candidate, i) =>
             (
-                <Button variant={state.selected == candidate.id ? 'green' : 'red'} key={candidate.id} onClick={() => select(candidate.id)} >
-                    <Candidate >
+                <Button  key={candidate.id} onClick={() => select(candidate.id)} >
+                    <Candidate variant={state.selected == candidate.id ? 'teal' : null}>
                         <h1>{candidate.name}</h1>
                     </Candidate>
                 </Button>
             )
         )}
 
-        <IconButton variant="green">
+        <IconButton variant="teal">
             <FaVoteYea fontSize="32" />
         </IconButton>
     </>

@@ -45,8 +45,9 @@ function App() {
   }, [state]);
   return (
     <Main>
-      <Header>
+      <Header state={state}>
         <em>DEMO</em>GRAPHY
+        {state.id != '' ? <h1>Room ID: {state.id} </h1> : ' ' }
       </Header>
       <Screen>
         <Routes>
