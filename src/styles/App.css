@@ -1,0 +1,15 @@
+@import url('http://fonts.cdnfonts.com/css/nimbus-sans-l');
+@import url('http://fonts.cdnfonts.com/css/aileron');
+
+/* font-family: 'Nimbus Sans L', sans-serif;    
+font-family: 'Aileron', sans-serif; */
+
+html, body {
+	height: 100%;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	user-select: none;
+}
+
