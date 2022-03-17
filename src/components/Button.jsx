@@ -1,10 +1,12 @@
 import styled from 'styled-components';
 import * as S from './_styled';
 
-const Button = styled.a`
+const Button = styled.button`
+    border: none;
     width: 250px;
     border-radius: 10px;
     height: 50px;
+    margin: 5px;
     color: white;
     display: flex;
     align-items: center;
@@ -13,6 +15,9 @@ const Button = styled.a`
     opacity: 0.8;
     transition: 0.1s ease-out;
     user-select: none ;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit ;
 
     &:hover {
         opacity: 1;
@@ -29,7 +34,12 @@ const Button = styled.a`
             break;
             case 'default' : return ``
         }
+
     }}
+
+
+
+    
 
 
 `

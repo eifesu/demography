@@ -72,6 +72,20 @@ function Management({ state, setState }) {
 
         return () => candidatesSub();
     }, []);
+
+    useEffect(() => {
+        const q = query(collection(db, "votes"), where("roomId", "==", state.id))
+        const voteSub = onSnapshot(q, (snapshot) => {
+            let votes = [];
+            snapshot.forEach((doc) => {
+                const data = doc.data()
+                votes.push({...data, id: doc.id})
+            })
+            setState((prevState) => ({ ...prevState, votes }))
+        })
+
+        return () => voteSub();
+    }, []);
     return (
         <>
             <Title><em>CREATE YOUR</em> POLL</Title>
@@ -98,6 +112,9 @@ function Management({ state, setState }) {
                     <Candidate >
                         <Bar />
                         <h1>{candidate.name}</h1>
+                        {state.votes ? <h1>
+                            {state.votes.filter((v) => v.candidateId == candidate.id).length}
+                        </h1> : null}
                     </Candidate>
                 </Button>
             )

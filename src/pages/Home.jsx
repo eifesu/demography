@@ -6,7 +6,7 @@ import { FaLock } from 'react-icons/fa';
 import * as S from '../components/_styled';
 import { getFirestore, collection, addDoc, onSnapshot, setDoc, doc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
-import {useEffect, useRef} from 'react'
+import { useRef} from 'react'
 function makeid(length) {
     var result = '';
     var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -31,7 +31,6 @@ const Home = ({state, setState}) => {
             id,
             enabled: false,
         })
-
         setState(prevState => ({...prevState, id}))
         navigate('/create', {replace: true})
     }
